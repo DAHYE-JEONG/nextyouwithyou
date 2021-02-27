@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+   <style>
+    h2, .table{
+      margin: 15px;
+    }
+    .jumbotron {
+      margin: 10px;
+      background-color: #eed3d3;
+    }
+    .table .thead-light th {
+      color: #495057;
+      background-color: #eed3d3;
+      border-color: #eed3d3;
+    }
+   </style>
+{% endblock%}
+
+{% block content %}
+<div class="jumbotron">
+  <span style="font-size:36px;">Todo List</span>
+  <br><br>
+
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  <form action="{% url 'todo:create' %}" method="post">
+    {% csrf_token %}
+    <!-- Todo Name -->
+    <div class="form-group">
+      <label for="todo" class="col-sm-3 control-label">Todo</label>
+      <div class="col-sm">
+        <input type="text" class="form-control" name="body" maxlength="300" required="" id="id_body">
+      </div>
+      <div class="col-sm-offset-3 col-sm-6">
+        <button type="submit" class="btn btn-default">Add Todo</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<h2>Current Todos</h2>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th colspan="3">Todo</th>
+      <th colspan="1">delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for post in posts %}
+      <tr>
+        <td colspan="3"><div>{{ post.body }}</div></td>
+        <td>
+          <form action="{% url 'todo:delete' post.id %}" method="post">
+            {% csrf_token %}
+            <button class="button">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

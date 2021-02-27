@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block stylesheet %}
+   <style>
+    .jumbotron {
+      margin: 10px;
+      background-color: #eed3d3;
+    }
+   </style>
+{% endblock%}
+
+{% block content %}
+<div class="jumbotron">
+  <h1 class="text-center">{{ title }}</h1>
+  <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <button class="btn">완료</button>
+  </form>
+</div>
+{% endblock %}

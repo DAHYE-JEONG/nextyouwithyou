@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+   <style>
+    h2, .table{
+      margin: 15px;
+    }
+    .jumbotron {
+      margin: 10px;
+      
+    }
+   </style>
+{% endblock%}
+
+{% block content %}
+  <div class="jumbotron" style="margin:10px;">
+    <h1>제목 : {{ diary_detail.title }}</h1>
+    <br>
+    <h4>작성일 : {{ diary_detail.date }}</h4>
+    <br>
+    <h4>작성자 : {{ diary_detail.author }}</h4>
+    <br>
+    <p class="lead">{{ diary_detail.body | safe }}</p>
+    <br>
+  </div>
+{% endblock %}

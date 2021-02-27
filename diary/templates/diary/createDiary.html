@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+   <style>
+    h2, .table{
+      margin: 15px;
+    }
+    .jumbotron {
+      margin: 10px;
+      background-color: #eed3d3;
+    }
+    .table .thead-light th {
+      color: #495057;
+      background-color: #eed3d3;
+      border-color: #eed3d3;
+    }
+   </style>
+{% endblock%}
+
+{% block content %}
+  <div class="jumbotron">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.media }}
+      {{ form.as_p }}
+      <input type="submit" class="btn" value="저장"/>
+    </form>
+  </div>
+{% endblock %}

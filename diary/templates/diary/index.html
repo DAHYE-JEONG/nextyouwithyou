@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+   <style>
+    h2, .table{
+      margin: 15px;
+    }
+    .jumbotron {
+      margin: 10px;
+      
+    }
+   </style>
+{% endblock%}
+
+{% block content %}
+  {% for diary in diarys %}
+      <div class="jumbotron" style="margin:10px;">
+        <h1>제목 : {{ diary.title }}</h1>
+        <br>
+        <h4>작성일 : {{ diary.date }}</h4>
+        <br>
+        <h4>작성자 : {{ diary.author }}</h4>
+        <br>
+        <a class="btn" href="{% url 'diary:detail' diary.id %}" role="button">
+        View Details &raquo;</a>
+        <form action="{% url 'diary:delete' diary.id %}" method="post">
+          {% csrf_token %}
+          <a class="btn">Delete</a>
+        </form>
+      </div>
+  {% endfor %}
+{% endblock %}
+
+
+
+
